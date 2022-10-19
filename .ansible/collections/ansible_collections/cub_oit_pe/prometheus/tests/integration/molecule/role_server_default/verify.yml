@@ -1,0 +1,25 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Check binary version
+    ansible.builtin.command:
+      cmd: /usr/bin/prometheus --version
+    register: bin_version
+    failed_when: prometheus_version not in bin_version.stderr
+    vars:
+      prometheus_version: "2.24.1"
+  - name: Check HTTP
+    ansible.builtin.uri:
+      url: "http://localhost:9090"
+  - name: Check versionlock
+    ansible.builtin.command:
+      argv:
+        - dnf
+        - versionlock
+        - list
+    register: out
+    failed_when: '"prometheus" not in out.stdout'

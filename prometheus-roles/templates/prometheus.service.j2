@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+
+#Change this line if you download the 
+#Prometheus on different path user
+WorkingDirectory={{ prometheus_untar_location }}/prometheus-{{ prometheus_version }}.linux-amd64
+ExecStart="{{ prometheus_untar_location }}prometheus-{{ prometheus_version }}.linux-amd64/prometheus"
+
+[Install]
+WantedBy=multi-user.target

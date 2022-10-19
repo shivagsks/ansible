@@ -1,0 +1,4 @@
+---
+# vars file for node_expoter-roles
+node_version: 1.4.0-rc.0
+node_untar_location: /home/vagrant/

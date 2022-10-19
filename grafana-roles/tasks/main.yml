@@ -1,0 +1,22 @@
+---
+# tasks file for grafana-roles
+- name: installing grafana rpm package
+  get_url:
+    url: "https://dl.grafana.com/enterprise/release/grafana-enterprise-{{ grafana_version }}.linux-amd64.tar.gz"
+    dest: "/tmp/grafana-enterprise-{{ grafana_version }}.linux-amd64.tar.gz"
+    mode: 0755
+- name: unarchive the tar file
+  unarchive:
+    src: "/tmp/grafana-enterprise-{{ grafana_version }}.linux-amd64.tar.gz"
+    dest: "{{ grafana_location }}"
+    remote_src: yes
+- name: copy the node_exporter service file
+  template:
+    src: templates/grafana.service.j2
+    dest: /etc/systemd/system/grafana.service
+- name: start and enable the service
+  service:
+    daemon_reload: yes
+    name: grafana
+    state: started
+    enabled: yes

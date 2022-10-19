@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: rename
+     copy:
+       src: /home/vagrant/prometheus-2.37.1.linux-amd64
+       dest: /home/vagrant/prometheus
+     remote_src: yes
+   - name: copy the service file
+     copy:
+       src: /home/vagrant/prometheus.service
+       dest: /home/vagrant/prometheus.service
+     remote_src: no

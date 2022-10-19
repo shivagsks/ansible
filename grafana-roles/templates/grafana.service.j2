@@ -1,0 +1,15 @@
+[Unit]
+Description=grafana Server
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+
+#Change this line if you download the
+#Prometheus on different path user
+WorkingDirectory={{ grafana_location }}/grafana-{{ grafana_version }}
+ExecStart={{ grafana_location }}/grafana-{{ grafana_version }}/bin/grafana-server
+
+[Install]
+WantedBy=multi-user.target

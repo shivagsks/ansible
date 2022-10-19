@@ -1,0 +1,33 @@
+---
+# tasks file for prometheus-roles
+# installing the prometheus
+- name: Installing the prometheus
+  get_url:
+    url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+    dest: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+  register: _download_archive
+- debug:
+    var: _download_archive
+- name: untar the tar file
+  unarchive:
+    src: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+    dest: "{{ prometheus_untar_location }}"
+    remote_src: yes
+
+# Copying the prometheus template file to the destination node
+- name: Copy prometheus service file
+  template:
+    src: templates/prometheus.service.j2
+    dest: /etc/systemd/system/prometheus.service
+- name: Copy prometheus.yml of node_exporter file
+  template:
+    src: templates/prometheus.yml.j2
+    dest: /home/vagrant/prometheus-{{ prometheus_version }}.linux-amd64/prometheus.yml
+- name: Start and enable prometheus
+  service:
+    daemon_reload: yes
+    name: prometheus
+    state: started
+    enabled: yes
+    #when: ansible_service_mgr == "systemd"
+    #become: yes

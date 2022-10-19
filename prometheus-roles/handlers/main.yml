@@ -1,0 +1,6 @@
+---
+# handlers file for prometheus-roles
+- name: rename
+  shell: mv /home/vagrant/prometheus-* /home/vagrant/prometheus
+- name: node_rename
+  shell: mv /home/vagrant/node_exporter-* /home/vagrant/node_exporter

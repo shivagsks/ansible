@@ -1,0 +1,41 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: installing promethus
+      get_url:
+        url: https://github.com/prometheus/prometheus/releases/download/v2.37.1/prometheus-2.37.1.linux-amd64.tar.gz
+        dest: /tmp/
+    - name: untar the file
+      unarchive:
+        src: /tmp/prometheus-2.37.1.linux-amd64.tar.gz
+        dest: /home/vagrant/
+        mode: 0755
+        remote_src: yes
+      register: tar_output
+    - debug:
+        var: tar_output
+    - name: rename
+      shell: mv /home/vagrant/prometheus-2.37.1.linux-amd64 /home/vagrant/prometheus
+        #remote_src: yes
+    - name: copy the service file
+      copy:
+        src: /home/vagrant/prometheus.yml
+        dest: /home/vagrant/prometheus/prometheus.yml
+        remote_src: no
+    - name: copy the service file
+      copy:
+        src: /home/vagrant/prometheus.service
+        dest: /home/vagrant/prometheus.service
+        remote_src: no
+
+    - name: copy the service file
+      copy:
+        src: /home/vagrant/prometheus.service
+        dest: /etc/systemd/system/
+        remote_src: no
+    - name: service start
+      systemd:
+        daemon_reload: yes
+        state: started
+        enabled: yes
+        name: prometheus.service

@@ -1,0 +1,4 @@
+---
+# vars file for grafana-roles
+grafana_version: 9.1.6
+grafana_location: /home/vagrant/

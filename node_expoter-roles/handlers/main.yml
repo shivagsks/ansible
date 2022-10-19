@@ -1,0 +1,4 @@
+---
+# handlers file for node_expoter-roles
+- name: node_rename
+  shell: mv /home/vagrant/node_exporter-* /home/vagrant/node_exporter

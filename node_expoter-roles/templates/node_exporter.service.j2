@@ -1,0 +1,16 @@
+[Unit]
+Description=node_expoter Server
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+
+#Change this line if you download the
+#Prometheus on different path user
+WorkingDirectory={{ node_untar_location }}node_exporter-{{ node_version }}.linux-amd64
+ExecStart={{ node_untar_location }}node_exporter-{{ node_version }}.linux-amd64/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+

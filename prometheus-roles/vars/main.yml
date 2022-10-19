@@ -1,0 +1,24 @@
+---
+# vars file for prometheus-roles
+prometheus_version: 2.37.1
+prometheus_location: /tmp/
+prometheus_untar_location: /home/vagrant/
+
+node_ip1: 192.168.56.105:9100
+node_ip2:  192.168.56.106:9100
+prometheus_scrape_interval: "30s"
+prometheus_node_exporter: true
+prometheus_node_exporter_group: "all"
+prometheus_env: "production"
+
+prometheus_var_config:
+  global:
+    scrape_interval: "{{ prometheus_scrape_interval }}"
+    evaluation_interval: 5s
+    external_labels:
+      env: '{{ prometheus_env }}'
+  scrape_configs:
+    - job_name: prometheus
+      scrape_interval: 5m
+      static_configs:
+        - targets: ['{{ inventory_hostname }}:9090']

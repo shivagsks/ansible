@@ -1,0 +1,31 @@
+{
+ "format": 1,
+ "file_manifest_file": {
+  "format": 1,
+  "chksum_type": "sha256",
+  "chksum_sha256": "4bb0118e3ebc0b3c7240186842c4de81ac6b29204d92058da48396d3aa7cab9e",
+  "name": "FILES.json",
+  "ftype": "file"
+ },
+ "collection_info": {
+  "homepage": "https://github.com/CUB-OIT-PE/ansible-prometheus",
+  "name": "prometheus",
+  "documentation": "https://github.com/CUB-OIT-PE/ansible-prometheus/blob/main/README.md",
+  "authors": [
+   "Will Haines <william.haines@colorado.edu>",
+   "Erinn Looney-Triggs <looneytr@colorado.edu>"
+  ],
+  "license_file": "LICENSE",
+  "repository": "https://github.com/CUB-OIT-PE/ansible-prometheus",
+  "description": "Installs and manages Prometheus",
+  "issues": "https://jira.colorado.edu/projects/SEPE/issues",
+  "namespace": "cub_oit_pe",
+  "readme": "README.md",
+  "tags": [],
+  "license": [],
+  "dependencies": {
+   "community.general": ">=2.0.0"
+  },
+  "version": "1.7.0"
+ }
+}

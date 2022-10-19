@@ -1,0 +1,9 @@
+{{ prometheus_var_config | to_nice_yaml(indent=2) }}
+- job_name: node
+  scrape_interval: 15s
+  metrics_path: /metrics
+  static_configs:
+  - targets:
+{% for server in groups[prometheus_node_exporter_group] %}
+    - '{{ server }}:9100'
+{% endfor %}

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    #- role: '/home/vagrant/node_expoter-roles'
+    #- role: '/home/vagrant/grafana-roles'
+    - role: '/home/vagrant/prometheus-roles'
